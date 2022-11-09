@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.Select;
 public class Vehicles_StepDefinitions {
 
     VehicleCostsPage vehicleCostsPage = new VehicleCostsPage();
-    LoginPage loginPage = new LoginPage();
 
     @Given(": user is already logged in and on main page")
     public void userIsAlreadyLoggedInAndOnMainPage() {
@@ -68,8 +67,8 @@ public class Vehicles_StepDefinitions {
         String actualTitle= vehicleCostsPage.title.getText();
         Assert.assertEquals(expectedTitle,actualTitle);
     }
-    @And("user selects a vehicle {string}")
-    public void userSelectsAVehicle(String vehicle) {
+    @And("user selects a vehicle")
+    public void userSelectsAVehicle() {
        vehicleCostsPage.vehicleDropdown.click();
        BrowserUtils.waitFor(1);
       WebElement audi= Driver.getDriver().findElement(By.linkText("Audi/A1/"));
@@ -78,8 +77,8 @@ public class Vehicles_StepDefinitions {
     }
 
 
-    @And("user selects a type {string}")
-    public void userSelectsAType(String type) {
+    @And("user selects a type")
+    public void userSelectsAType() {
        vehicleCostsPage.typeDropdown.click();
        BrowserUtils.waitFor(1);
        WebElement snowTires= Driver.getDriver().findElement(By.linkText("Snow tires"));
@@ -118,14 +117,83 @@ public class Vehicles_StepDefinitions {
 
 
     @Then("title is changed to {string} and new table is created")
-    public void titleIsChangedToFrom(String title ) {
+    public void titleIsChangedToFrom(String vehicle) {
 
         Assert.assertTrue(vehicleCostsPage.title.isDisplayed());
         BrowserUtils.waitFor(2);
 
     }
 
+    @Then("user sees These fields are invalid error message")
+    public void userSeesTheseFieldsAreInvalidErrorMessage() {
+        Driver.getDriver().getWindowHandles();
+        vehicleCostsPage.warningMessage.isDisplayed();
+        BrowserUtils.waitFor(2);
+        Assert.assertTrue(vehicleCostsPage.warningMessage.isDisplayed());
+
+    }
+
+
+    @And("user clicks on discard button")
+    public void userClicksOnDiscardButton() {
+        vehicleCostsPage.discardButton.click();
+        BrowserUtils.waitFor(2);
+
+
+    }
+
+    @And("user sees warning message")
+    public void userSeesWarningMessage() {
+        vehicleCostsPage.warningMessage.isDisplayed();
+        Assert.assertTrue(vehicleCostsPage.warningMessage.isDisplayed());
+        BrowserUtils.waitFor(2);
+
+
+    }
+
+    @And("user clicks on ok button")
+    public void userClicksOnOkButton() {
+        vehicleCostsPage.okButton.click();
+        BrowserUtils.waitFor(2);
+
+    }
+
+    @Then("user is back to vehicle costs page")
+    public void userIsBackToVehicleCostsPage() {
+       vehicleCostsPage.title.isDisplayed();
+       BrowserUtils.waitFor(2);
+
+    }
+
+    @Then("user sees the title is vehicle costs")
+    public void userSeesTheTitleIsVehicleCosts() {
+        Assert.assertTrue(vehicleCostsPage.title.isDisplayed());
+        BrowserUtils.waitFor(2);
+
+    }
+
+    @Then("title is changed to {string} - Odoo")
+    public void titleIsChangedToOdoo(String string) {
+        String title = Driver.getDriver().getTitle();
+        System.out.println("title = " + title);
+
+        BrowserUtils.sleep(2);
+        Assert.assertTrue(title.contains(string));
+        BrowserUtils.sleep(2);
+
+    }
+
+
+    @Then("user sees Attachments and Action buttons")
+    public void userSeesAttachmentSAndActionButtons() {
+     vehicleCostsPage.attachmentButton.isDisplayed();
+     vehicleCostsPage.actionButton.isDisplayed();
+     Assert.assertTrue(vehicleCostsPage.attachmentButton.isDisplayed());
+     Assert.assertTrue(vehicleCostsPage.actionButton.isDisplayed());
+    }
+
 
 
 
 }
+

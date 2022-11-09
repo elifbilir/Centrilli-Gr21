@@ -62,6 +62,28 @@ public class VehicleCostsPage {
     @FindBy(xpath = "(//div//li[@class='active'])[3]")
     public WebElement title;
 
+    @FindBy (xpath = "(//div//span[@class='o_dropdown_button'])[1]")
+    public WebElement warningMessage;
+
+    @FindBy(xpath = "//div//button[@class='btn btn-default btn-sm o_form_button_cancel']")
+    public WebElement discardButton;
+
+    @FindBy(xpath = "//div//button//span[.='Ok']")
+    public WebElement okButton;
+
+    @FindBy(xpath = "//h4[@class='modal-title']")
+    public WebElement discardWarningMessage;
+
+
+    @FindBy(xpath = "(//div[@class='btn-group o_dropdown'])[2]")
+    public WebElement attachmentButton;
+
+
+    @FindBy(xpath = "(//div[@class='btn-group o_dropdown'])[3]")
+    public WebElement actionButton;
+
+
+
 
 
 
